@@ -6,11 +6,11 @@ from h.util import cors
 
 cors_policy = cors.policy(
     allow_headers=(
-        'Authorization',
-        'Content-Type',
-        'X-Client-Id',
+        str('Authorization'),
+        str('Content-Type'),
+        str('X-Client-Id'),
     ),
-    allow_methods=('HEAD', 'GET', 'PATCH', 'POST', 'PUT', 'DELETE'))
+    allow_methods=(str('HEAD'), str('GET'), str('PATCH'), str('POST'), str('PUT'), str('DELETE')))
 
 
 def add_api_view(config, view, link_name=None, description=None,

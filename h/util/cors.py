@@ -50,7 +50,7 @@ def set_cors_headers(request, response,
     # If the request is anything other than an OPTIONS request, we just
     # pass it through and add "A-C-A-O: *" to the response headers.
     if request.method != 'OPTIONS':
-        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers[str('Access-Control-Allow-Origin')] = str('*')
         return response
 
     # Otherwise, we're dealing with a CORS preflight request, which,
@@ -70,7 +70,7 @@ def set_cors_headers(request, response,
                              'Access-Control-Request-Method header.')
 
     # Always explicitly allow OPTIONS requests.
-    methods = set(['OPTIONS'])
+    methods = set([str('OPTIONS')])
     if allow_methods is not None:
         methods.update(allow_methods)
 
@@ -79,18 +79,18 @@ def set_cors_headers(request, response,
     # methods, but there's no need to do this as we can simply return what is
     # allowed and the browser will do the rest.
     headers = response.headers
-    headers['Access-Control-Allow-Origin'] = origin
-    headers['Access-Control-Allow-Methods'] = ', '.join(methods)
-    headers['Access-Control-Max-Age'] = str(max_age)
+    headers[str('Access-Control-Allow-Origin')] = origin
+    headers[str('Access-Control-Allow-Methods')] = str(', ').join(methods)
+    headers[str('Access-Control-Max-Age')] = str(max_age)
 
     if allow_credentials:
-        headers['Access-Control-Allow-Credentials'] = 'true'
+        headers[str('Access-Control-Allow-Credentials')] = str('true')
 
     if allow_headers is not None:
-        headers['Access-Control-Allow-Headers'] = ', '.join(allow_headers)
+        headers[str('Access-Control-Allow-Headers')] = str(', ').join(allow_headers)
 
     if expose_headers is not None:
-        headers['Access-Control-Expose-Headers'] = ', '.join(expose_headers)
+        headers[str('Access-Control-Expose-Headers')] = str(', ').join(expose_headers)
 
     return response
 
